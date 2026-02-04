@@ -18,7 +18,7 @@ class VoiceRequest(BaseModel):
 def root():
     return {"status": "ok"}
 
-@app.post("/detect-voice")
+@app.post("/detect")
 def detect_voice(
     data: VoiceRequest,
     x_api_key: str = Header(...)
@@ -39,8 +39,13 @@ def detect_voice(
     confidence = float(1 / (1 + np.exp(-score)))
 
     prediction = "AI_GENERATED" if confidence > 0.6 else "HUMAN"
+    is_ai = True if prediction == "AI_GENERATED" else False
+
 
     return {
-        "prediction": prediction,
-        "confidence": round(confidence, 2)
-    }
+    "status": "success",
+    "is_ai_generated": is_ai,
+    "confidence": round(confidence, 2),
+    "language": data.language
+}
+
