@@ -234,6 +234,7 @@ def detect_voice(
     # 3) AI vs Human: trained model if available, else heuristic
     prediction, _ = predict_ai_vs_human(audio, sr)
 
+<<<<<<< HEAD
     return {
         "language": language,
         "prediction": prediction,
@@ -253,3 +254,15 @@ else:
     @app.get("/")
     def root():
         return {"status": "ok", "message": "Static frontend not found. Add a 'static' folder with index.html."}
+=======
+
+
+   prediction = "AI_GENERATED" if confidence > 0.6 else "HUMAN"
+
+return {
+    "prediction": prediction,
+    "confidence": round(confidence, 2)
+}
+
+
+>>>>>>> 40268a2ed6bdf996d8bf4e32ca3f8ba88e3e81f3
