@@ -7,10 +7,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
   <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="connection-banner" id="connectionBanner" hidden>
+    <span class="connection-banner-text">Open this app from the server to avoid connection errors:</span>
+    <a class="connection-banner-link" href="http://127.0.0.1:8000/" id="connectionBannerLink">http://127.0.0.1:8000</a>
+    <span class="connection-banner-hint">(Start the server first: run <code>run.bat</code> or <code>python -m uvicorn main:app --reload</code> from the ai-voice-detection- folder)</span>
+  </div>
 
   <header class="header">
     <nav class="nav">
@@ -41,9 +46,10 @@
           Detect the <span class="highlight">source</span>.
         </h1>
         <p class="hero-subtitle">
-          Upload or record audio — we detect its language and tell you if it’s human or AI-generated. 
+          Upload or record audio — we detect <strong>English</strong> or <strong>Hindi (Devanagari)</strong> and tell you if the voice is human or AI-generated.
           One click, clear results.
         </p>
+        <p class="hero-langs">We detect only: <span class="lang-tag">English</span> and <span class="lang-tag">Hindi (Devanagari)</span></p>
         <a href="#analyzer" class="cta-primary">Start analyzing</a>
       </div>
       <div class="hero-visual">
@@ -59,11 +65,12 @@
 
     <section id="features" class="features">
       <h2 class="section-title">What we detect</h2>
+      <p class="section-subtitle section-langs">We support <strong>English</strong> and <strong>Hindi (Devanagari)</strong> only. Speak or upload in one of these for best results.</p>
       <div class="feature-cards">
         <article class="feature-card">
           <div class="feature-icon">🌐</div>
           <h3>Language detection</h3>
-          <p>Identifies the spoken language of your audio in seconds.</p>
+          <p>Identifies whether your audio is <strong>English</strong> or <strong>Hindi (Devanagari)</strong>.</p>
         </article>
         <article class="feature-card">
           <div class="feature-icon">🤖</div>
@@ -80,7 +87,11 @@
 
     <section id="analyzer" class="analyzer">
       <h2 class="section-title">Analyze your audio</h2>
-      <p class="section-subtitle">Record yourself, speak now, or drop a file — we’ll detect language and authenticity.</p>
+      <p class="section-subtitle">Record or upload in <strong>English</strong> or <strong>Hindi (Devanagari)</strong> — we'll detect which language and whether the voice is human or AI.</p>
+      <div class="analyzer-langs-callout">
+        <span class="callout-icon">🌐</span>
+        <span>We detect only <strong>English</strong> and <strong>Hindi (Devanagari)</strong>. Use one of these languages for accurate results.</span>
+      </div>
 
       <div class="analyzer-container">
         <div class="input-panel">
@@ -145,7 +156,10 @@
               <span class="result-label">Confidence</span>
               <span class="result-value" id="resultConfidence">—</span>
             </div>
-            <p class="results-note">Backend integration will replace this with live API results.</p>
+            <p class="results-note">Detected language is either <strong>English</strong> or <strong>Hindi (Devanagari)</strong>. Confidence is higher when speech is continuous; lower when there are gaps or pauses.</p>
+          </div>
+          <div class="results-error" id="resultsError" hidden>
+            <p id="resultsErrorText"></p>
           </div>
         </div>
       </div>
@@ -164,16 +178,16 @@
         </li>
         <li>
           <span class="step-num">3</span>
-          <strong>Get results</strong> — See the detected language and whether it’s AI or human.
+          <strong>Get results</strong> — See the detected language and whether it's AI or human.
         </li>
       </ol>
     </section>
   </main>
 
   <footer class="footer">
-    <p>VoiceGuard — Language & AI voice detection. Backend integration coming soon.</p>
+    <p>VoiceGuard — Language & AI voice detection. Powered by VoiceGuard API.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="/static/script.js"></script>
 </body>
 </html>
